@@ -96,6 +96,7 @@ class mobileBlock : public sc_module {
 				imagePacketCounter++;
 				transmitPacketCounter++;
 				tupleCounter = 0;
+				//cout<<"@"<<sc_time_stamp().to_seconds()<<"s "<<s<<" packets = "<<imagePacketCounter<<endl;
 				prcTx();
 			}
 

@@ -1,8 +1,5 @@
-@ 0 s----------Start---------
-
-
+//Handshaking activities
 @ 0 s----------Start Simulation---------
-
 
 @15.11s _mobile1_ requests network access
 @15.11s _mobile2_ requests network access
@@ -94,4 +91,33 @@
 @91.01s _mobile3_ begins packet transmission
 @91.018s _mobile3_ ends packet transmission
 
+@ 100 s----------End Simulation---------
+
+
+//Counting the packets at each time interval
+
+@ 0 s----------Start Simulation---------
+
+
+@15.11s _mobile1_ packets = 1
+@15.11s _mobile2_ packets = 1
+@15.11s _mobile3_ packets = 1
+@23.21s _mobile1_ packets = 2
+@27.21s _mobile2_ packets = 2
+@30.21s _mobile3_ packets = 2
+@39.32s _mobile1_ packets = 3
+@43.32s _mobile2_ packets = 3
+@46.32s _mobile3_ packets = 3
+@52.18s _mobile1_ packets = 4
+@56.18s _mobile2_ packets = 4
+@59.18s _mobile3_ packets = 4
+@63.61s _mobile1_ packets = 5
+@67.61s _mobile2_ packets = 5
+@70.61s _mobile3_ packets = 5
+@76.21s _mobile1_ packets = 6
+@80.21s _mobile2_ packets = 6
+@83.21s _mobile3_ packets = 6
+@88.01s _mobile1_ packets = 7
+@92.01s _mobile2_ packets = 7
+@95.01s _mobile3_ packets = 7
 @ 100 s----------End Simulation---------
