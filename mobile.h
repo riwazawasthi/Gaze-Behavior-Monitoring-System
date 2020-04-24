@@ -10,7 +10,7 @@
 #define MOBILE_H
 
 #include<systemc.h>
-#include<LIB.h>
+#include<data_structures.h>
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 
@@ -37,13 +37,22 @@ class mobileBlock : public sc_module {
 	private:
 		int tupleCounter = 0;
 		int packetCounter = 0;
+		int gazeDataIndex = 0;
 		std::vector<roiTuple> tupleMap;
 
 		void prcSensor () {
 			while(true){
 				wait();
 				int x, y;
-	      //read and store x,y;
+
+				if(gazeDataIndex >= _gazeMap.size()){
+					gazeDataIndex = 0;
+				}
+				//read and store x,y;
+				x = _gazeMap[gazeDataIndex].x;
+				y = _gazeMap[gazeDataIndex].y;
+				gazeDataIndex++;
+
 				prcConvert(point(x,y));  //transfer the flow
 			}
 
@@ -74,7 +83,7 @@ class mobileBlock : public sc_module {
 		}
 
 		void prcPacketize (const roiTuple &_r) {
-			tupleMap_res.push_back(roiTuple(_roi , 0 , 1));
+			tupleMap.push_back(_r);
 			tupleCounter++;
 			if(tupleCounter==TUPLES_PER_PACKETS){
 				packetCounter++;
@@ -86,12 +95,13 @@ class mobileBlock : public sc_module {
 		void prcTx () {
 			while(packetCounter>0){
 				while(!network_free.read()){
+					cout<<sc_time_stamp()<<" Network busy"<<endl;
 					srand(time(NULL));
-					wait(rand()%6 , SC_SEC);
+					wait(rand()%6 , SC_SEC);  //wait if netwrok busy
 				}
 				bool success = false;
 				while(!success){
-					request.write(1);
+					request.write(1); //request network access
 					wait(5,SC_NS);
 					if(server_ack.read()){
 						start.write(0);
@@ -100,6 +110,7 @@ class mobileBlock : public sc_module {
 						start.write(1);
 						wait(8,SC_MS); //packet delay = packet size/bandwidth
 						end.write(1);
+
 						success = true;
 						packetCounter--;
 					}
@@ -109,6 +120,7 @@ class mobileBlock : public sc_module {
 						break;
 					}
 				}
+				request.write(0);
 			}
 
 		}

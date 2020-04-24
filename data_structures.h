@@ -3,6 +3,8 @@
 
 #include<systemc.h>
 #include <map>
+#include <fstream>
+#include<iostream>
 
 #define TUPLES_PER_PACKETS 20
 
@@ -22,8 +24,10 @@ struct point {
 };
 
 std::map<int , std::vector<point> > roiMap ();
+std::vector<point> gazeMap();
 
 std::map<int , std::vector<point> > _roiMap = roiMap();
+std::vector<point> _gazeMap = gazeMap();
 
 std::map<int , std::vector<point> > roiMap () { //image 1
   	std::map<int , std::vector<point> > _map;
@@ -44,5 +48,24 @@ std::map<int , std::vector<point> > roiMap () { //image 1
     _map[5].push_back(point(1000 , 1000));
   	return _map;
 }
+
+std::vector<point> gazeMap(){
+  std::vector<point> _map1;
+  std::vector<int> temp;
+  int x;
+  std::ifstream file ("gazeData.txt");
+  while(file>>x){
+    temp.push_back(x);
+  }
+  file.close();
+
+  for(int i = 0; i<temp.size() ; i = i+2){
+    _map1.push_back(point(temp[i], temp[i+1]));
+  }
+
+  return _map1;
+
+}
+
 
 #endif
