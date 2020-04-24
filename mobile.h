@@ -1,9 +1,18 @@
-/*
- * network_free -> network status
- * server_ack -> ACK from server if it's okay
- * request -> request network access
- * start -> positive edge indicates packet transfer beginning
- * end -> positive edge indicates packet transfer end
+/*Author : Riwaz Awasthi
+ *Description: The following code implements a mobile module that collects
+ * a person's gaze behavior and appropriately converts that data into a tuple.
+ * Each tuple is stored in a data structure with the start and end times for "gaze"
+ * at a certain ROI of image is adjusted. Once there are 20 tuples, the module packetizes it
+ * and tries to transfer it to the server module. Two signals are used to indicate the packet transmission
+ * beginning and end. The bandwidth of transmission is 0.5MHz and since a tuple has three elements,
+ * (ROI_index, t_start, t_end), with each element of tuple being 64bits, the packet size if 64x3 bits.
+ * The packet transmission delay is equal to the packet size/bandwidth which comes out to be about 8ms.
+ *Input/Outputs:-
+  * network_free -> network status
+  * server_ack -> ACK from server if it's okay
+  * request -> request network access
+  * start -> positive edge indicates packet transfer beginning
+  * end -> positive edge indicates packet transfer end
  */
 
 #ifndef MOBILE_H
