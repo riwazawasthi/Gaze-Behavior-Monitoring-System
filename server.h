@@ -42,11 +42,11 @@ class serverBlock : public sc_module {
           continue;
         }
         if(requestM1.read()){  //if the request is from M1
-          cout<<sc_time_stamp()<<" mobile1"<<" requests network access"<<endl;
+          cout<<"@"<<sc_time_stamp().to_seconds()<<" mobile1"<<" requests network access"<<endl;
           if(_network_free){
             server_ok1.write(1);
             wait(5, SC_NS);
-            cout<<sc_time_stamp()<<" Network access granted to mobile1"<<endl;
+            cout<<"@"<<sc_time_stamp().to_seconds()<<" Network access granted to mobile1"<<endl;
           }
           _network_free = 0;
           network_free1.write(0);
@@ -55,9 +55,9 @@ class serverBlock : public sc_module {
           wait(5,SC_NS);
 
           wait(startM1.posedge_event());
-          cout<<sc_time_stamp()<<" mobile1"<<" begins packet transmission"<<endl;
+          cout<<"@"<<sc_time_stamp().to_seconds()<<" mobile1"<<" begins packet transmission"<<endl;
           wait(endM1.posedge_event());
-          cout<<sc_time_stamp()<<" mobile1"<<" ends packet transmission"<<endl;
+          cout<<"@"<<sc_time_stamp().to_seconds()<<" mobile1"<<" ends packet transmission"<<endl;
 
           _network_free = 1;
           network_free1.write(1);
@@ -67,11 +67,11 @@ class serverBlock : public sc_module {
         }
 
         if(requestM2.read()){//if the request is from M2
-          cout<<sc_time_stamp()<<" mobile2"<<" requests network access"<<endl;
+          cout<<"@"<<sc_time_stamp().to_seconds()<<" mobile2"<<" requests network access"<<endl;
           if(_network_free){
             server_ok2.write(1);
             wait(5, SC_NS);
-            cout<<sc_time_stamp()<<" Network access granted to mobile2"<<endl;
+            cout<<"@"<<sc_time_stamp().to_seconds()<<" Network access granted to mobile2"<<endl;
           }
           _network_free = 0;
           network_free1.write(0);
@@ -80,9 +80,9 @@ class serverBlock : public sc_module {
           wait(5,SC_NS);
 
           wait(startM2.posedge_event());
-          cout<<sc_time_stamp()<<" mobile2"<<" begins packet transmission"<<endl;
+          cout<<"@"<<sc_time_stamp().to_seconds()<<" mobile2"<<" begins packet transmission"<<endl;
           wait(endM2.posedge_event());
-          cout<<sc_time_stamp()<<" mobile2"<<" ends packet transmission"<<endl;
+          cout<<"@"<<sc_time_stamp().to_seconds()<<" mobile2"<<" ends packet transmission"<<endl;
 
           _network_free = 1;
           network_free1.write(1);
@@ -92,11 +92,11 @@ class serverBlock : public sc_module {
         }
 
         if(requestM3.read()){ //if the request is from M3
-          cout<<sc_time_stamp()<<" mobile3"<<" requests network access"<<endl;
+          cout<<"@"<<sc_time_stamp().to_seconds()<<" mobile3"<<" requests network access"<<endl;
           if(_network_free){
             server_ok3.write(1);
             wait(5, SC_NS);
-            cout<<sc_time_stamp()<<" Network access granted to mobile3"<<endl;
+            cout<<"@"<<sc_time_stamp().to_seconds()<<" Network access granted to mobile3"<<endl;
           }
           _network_free = 0;
           network_free1.write(0);
@@ -105,9 +105,9 @@ class serverBlock : public sc_module {
           wait(5,SC_NS);
 
           wait(startM3.posedge_event());
-          cout<<sc_time_stamp()<<" mobile3"<<" begins packet transmission"<<endl;
+          cout<<"@"<<sc_time_stamp().to_seconds()<<" mobile3"<<" begins packet transmission"<<endl;
           wait(endM3.posedge_event());
-          cout<<sc_time_stamp()<<" mobile3"<<" ends packet transmission"<<endl;
+          cout<<"@"<<sc_time_stamp().to_seconds()<<" mobile3"<<" ends packet transmission"<<endl;
 
           _network_free = 1;
           network_free1.write(1);

@@ -19,8 +19,8 @@ class mobileBlock : public sc_module {
 	public:
 		// Inputs
 		sc_in<bool> clock;
-		sc_out<bool> network_free; // From Server
-		sc_out<bool> server_ack; // From Server
+		sc_in<bool> network_free; // From Server
+		sc_in<bool> server_ack; // From Server
 
 		// Outputs
 		sc_out<bool> request; // To Server
@@ -30,13 +30,15 @@ class mobileBlock : public sc_module {
 
 		SC_HAS_PROCESS(mobileBlock);
 		mobileBlock(sc_module_name name) : sc_module(name) {
-			SC_CTHREAD(prcSensor, clock.pos());
+			SC_THREAD(prcSensor);
+			sensitive<<clock.pos();
 
 		};
 
 	private:
 		int tupleCounter = 0;
-		int packetCounter = 0;
+		int imagePacketCounter = 0;
+		int transmitPacketCounter = 0;
 		int gazeDataIndex = 0;
 		std::vector<roiTuple> tupleMap;
 
@@ -44,7 +46,6 @@ class mobileBlock : public sc_module {
 			while(true){
 				wait();
 				int x, y;
-
 				if(gazeDataIndex >= _gazeMap.size()){
 					gazeDataIndex = 0;
 				}
@@ -52,7 +53,6 @@ class mobileBlock : public sc_module {
 				x = _gazeMap[gazeDataIndex].x;
 				y = _gazeMap[gazeDataIndex].y;
 				gazeDataIndex++;
-
 				prcConvert(point(x,y));  //transfer the flow
 			}
 
@@ -69,13 +69,16 @@ class mobileBlock : public sc_module {
 		}
 
 		void prcCompress (int _roi) {
-			if(!tupleMap.size()) {
+
+			if(tupleMap.size()==0) {
+
 				prcPacketize(roiTuple(_roi , 0 , 1)); //transfer the flow
 				return;
 			}
 			double temp = tupleMap.back().t_end;
 			if(tupleMap.back().roi == _roi) {
 				tupleMap.back().t_end = temp + 0.01; //increment the end time if new roi matches last roi
+
 			} else {
 				prcPacketize(roiTuple(_roi , temp + 0.01 , temp + 0.01));
 			}
@@ -85,17 +88,18 @@ class mobileBlock : public sc_module {
 		void prcPacketize (const roiTuple &_r) {
 			tupleMap.push_back(_r);
 			tupleCounter++;
-			if(tupleCounter==TUPLES_PER_PACKETS){
-				packetCounter++;
+			if(tupleCounter==20){
+				imagePacketCounter++;
+				transmitPacketCounter++;
 				tupleCounter = 0;
 			}
 			prcTx();
 		}
 
 		void prcTx () {
-			while(packetCounter>0){
+			while(transmitPacketCounter>0){
 				while(!network_free.read()){
-					cout<<sc_time_stamp()<<" Network busy"<<endl;
+					cout<<"@"<<sc_time_stamp().to_seconds()<<" s Network busy"<<endl;
 					srand(time(NULL));
 					wait(rand()%6 , SC_SEC);  //wait if netwrok busy
 				}
@@ -112,7 +116,7 @@ class mobileBlock : public sc_module {
 						end.write(1);
 
 						success = true;
-						packetCounter--;
+						transmitPacketCounter--;
 					}
 					else{
 						srand(time(NULL));
