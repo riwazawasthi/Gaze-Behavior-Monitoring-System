@@ -34,7 +34,10 @@ class gazeMonitor : public sc_module {
       m3 = new mobileBlock ("_mobile3_");
 
       network_free1.write(1);
+      network_free2.write(1);
+      network_free3.write(1);
 
+      //s->clock(clock);
       s->requestM1(request1);
       s->requestM2(request2);
       s->requestM3(request3);
@@ -87,11 +90,12 @@ class gazeMonitor : public sc_module {
 };
 
 int sc_main(int argc , char* argv[]) {
+  srand(time(NULL));
 	cout<<"@ "<<sc_time_stamp()<<"----------Start---------"<<endl<<endl<<endl;
 	gazeMonitor gaze("_gazeMonitor_");
 
 	cout<<"@ "<<sc_time_stamp()<<"----------Start Simulation---------"<<endl<<endl<<endl;
-	sc_start(30000 , SC_MS);
+	sc_start(100000 , SC_MS);
 	cout<<"@ "<<sc_time_stamp()<<"----------End Simulation---------"<<endl<<endl<<endl;
 	return 0;
 }

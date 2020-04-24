@@ -13,7 +13,7 @@
 #include<data_structures.h>
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
-
+#include <string>
 
 class mobileBlock : public sc_module {
 	public:
@@ -30,8 +30,11 @@ class mobileBlock : public sc_module {
 
 		SC_HAS_PROCESS(mobileBlock);
 		mobileBlock(sc_module_name name) : sc_module(name) {
+      s = name;
 			SC_THREAD(prcSensor);
 			sensitive<<clock.pos();
+			//SC_THREAD(prcTx);
+			//sensitive<<clock.pos();
 
 		};
 
@@ -41,6 +44,7 @@ class mobileBlock : public sc_module {
 		int transmitPacketCounter = 0;
 		int gazeDataIndex = 0;
 		std::vector<roiTuple> tupleMap;
+		std::string s;
 
 		void prcSensor () {
 			while(true){
@@ -92,42 +96,51 @@ class mobileBlock : public sc_module {
 				imagePacketCounter++;
 				transmitPacketCounter++;
 				tupleCounter = 0;
+				prcTx();
 			}
-			prcTx();
+
 		}
 
 		void prcTx () {
-			while(transmitPacketCounter>0){
-				while(!network_free.read()){
-					cout<<"@"<<sc_time_stamp().to_seconds()<<" s Network busy"<<endl;
-					srand(time(NULL));
-					wait(rand()%6 , SC_SEC);  //wait if netwrok busy
-				}
-				bool success = false;
-				while(!success){
-					request.write(1); //request network access
-					wait(5,SC_NS);
-					if(server_ack.read()){
-						start.write(0);
-						end.write(0);
+			//while(true){
+			//	wait();
+				while(transmitPacketCounter>0){
+					while(!network_free.read()){
+						cout<<"@"<<sc_time_stamp().to_seconds()<<"s "<<"Network busy for "<<s<<endl;
+						wait((rand()%6) , SC_SEC);  //wait if netwrok busy
+					}
+					bool success = false;
+					while(!success){
+						request.write(1); //request network access
+						cout<<"@"<<sc_time_stamp().to_seconds()<<"s "<<s<<" requests network access"<<endl;
 						wait(5,SC_NS);
-						start.write(1);
-						wait(8,SC_MS); //packet delay = packet size/bandwidth
-						end.write(1);
-
-						success = true;
-						transmitPacketCounter--;
+						if(server_ack.read()){
+							cout<<"@"<<sc_time_stamp().to_seconds()<<"s Network access granted to "<<s<<endl;
+							start.write(0);
+							end.write(0);
+							wait(5,SC_NS);
+							start.write(1);
+							cout<<"@"<<sc_time_stamp().to_seconds()<<"s "<<s<<" begins packet transmission"<<endl;
+							wait(8,SC_MS); //packet delay = packet size/bandwidth
+							end.write(1);
+							wait(5,SC_NS);
+							cout<<"@"<<sc_time_stamp().to_seconds()<<"s "<<s<<" ends packet transmission"<<endl;
+							success = true;
+							transmitPacketCounter--;
+						}
+						else{
+							cout<<"@"<<sc_time_stamp().to_seconds()<<"s Server didn't acknowledge "<<s<<endl;
+							wait(rand()%6 , SC_SEC);
+							break;
+						}
 					}
-					else{
-						srand(time(NULL));
-						wait(rand()%6 , SC_SEC);
-						break;
-					}
+					request.write(0);
+					wait(5,SC_NS);
 				}
-				request.write(0);
-			}
 
+			//}
 		}
+
 };
 
 #endif
