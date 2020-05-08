@@ -51,6 +51,8 @@ class mobileBlock : public sc_module {
 		int tupleCounter = 0;
 		int imagePacketCounter = 0;
 		int transmitPacketCounter = 0;
+		int receivePacketCounter = 0;
+		int image_counter = 0;
 		int gazeDataIndex = 0;
 		std::vector<roiTuple> tupleMap;
 		std::string s;
