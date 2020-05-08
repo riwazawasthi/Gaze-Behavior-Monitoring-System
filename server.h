@@ -167,88 +167,122 @@ class serverBlock : public sc_module {
 
     void transmitToMobile1(){
       for(int i = 0; i<MAX_RX_PACKETS; i++){
-        while(!_network_free){
-          //cout<<"@"<<sc_time_stamp().to_seconds()<<"s Network busy for server to send image packets to mobile 1"<<endl;
-          wait((rand()%6)+1 , SC_SEC);  //wait if netwrok busy
+        while(true){
+          if(_network_free){
+            /*
+            while(!_network_free){
+              //cout<<"@"<<sc_time_stamp().to_seconds()<<"s Network busy for server to send image packets to mobile 1"<<endl;
+              wait((rand()%6)+1 , SC_SEC);  //wait if netwrok busy
+            }
+            */
+            _network_free = false;
+            network_free1.write(0);
+            network_free2.write(0);
+            network_free3.write(0);
+
+            packet_start1.write(0);
+            packet_end1.write(0);
+            wait(5, SC_NS);
+            packet_start1.write(1);
+            //cout<<"@"<<sc_time_stamp().to_seconds()<<"s Image packet transmission to mobile 1 begins"<<endl;
+            wait(SERVER_TO_MOBILE_PACKET_TRANSMISSION_DELAY, SC_MS);
+            //cout<<"@"<<sc_time_stamp().to_seconds()<<"s Image packet transmission to mobile 1 ends"<<endl;
+            packet_end1.write(1);
+
+            _network_free = true;
+            network_free1.write(1);
+            network_free2.write(1);
+            network_free3.write(1);
+
+            wait(DELTA, SC_SEC);
+            break;
+          }
+          else{
+            wait(DELTA, SC_SEC);
+          }
+
         }
-        _network_free = false;
-        network_free1.write(0);
-        network_free2.write(0);
-        network_free3.write(0);
 
-        packet_start1.write(0);
-        packet_end1.write(0);
-        wait(5, SC_NS);
-        packet_start1.write(1);
-        //cout<<"@"<<sc_time_stamp().to_seconds()<<"s Image packet transmission to mobile 1 begins"<<endl;
-        wait(SERVER_TO_MOBILE_PACKET_TRANSMISSION_DELAY, SC_MS);
-        //cout<<"@"<<sc_time_stamp().to_seconds()<<"s Image packet transmission to mobile 1 ends"<<endl;
-        packet_end1.write(1);
-
-        _network_free = true;
-        network_free1.write(1);
-        network_free2.write(1);
-        network_free3.write(1);
-
-        wait(DELTA, SC_SEC);
       }
     }
 
     void transmitToMobile2(){
       for(int i = 0; i<MAX_RX_PACKETS; i++){
-        while(!_network_free){
-          //cout<<"@"<<sc_time_stamp().to_seconds()<<"s Network busy for server to send image packets to mobile 2"<<endl;
-          wait((rand()%6)+1 , SC_SEC);  //wait if netwrok busy
+        while(true){
+          if(_network_free){
+            /*
+            while(!_network_free){
+              //cout<<"@"<<sc_time_stamp().to_seconds()<<"s Network busy for server to send image packets to mobile 2"<<endl;
+              wait((rand()%6)+1 , SC_SEC);  //wait if netwrok busy
+            }
+            */
+            _network_free = false;
+            network_free1.write(0);
+            network_free2.write(0);
+            network_free3.write(0);
+
+            packet_start2.write(0);
+            packet_end2.write(0);
+            wait(5, SC_NS);
+            packet_start2.write(1);
+            //cout<<"@"<<sc_time_stamp().to_seconds()<<"s Image packet transmission to mobile 2 begins"<<endl;
+            wait(SERVER_TO_MOBILE_PACKET_TRANSMISSION_DELAY, SC_MS);
+            //cout<<"@"<<sc_time_stamp().to_seconds()<<"s Image packet transmission to mobile 2 ends"<<endl;
+            packet_end2.write(1);
+
+            _network_free = true;
+            network_free1.write(1);
+            network_free2.write(1);
+            network_free3.write(1);
+
+            wait(DELTA, SC_SEC);
+            break;
+          }
+          else{
+            wait(DELTA, SC_SEC);
+          }
         }
-        _network_free = false;
-        network_free1.write(0);
-        network_free2.write(0);
-        network_free3.write(0);
 
-        packet_start2.write(0);
-        packet_end2.write(0);
-        wait(5, SC_NS);
-        packet_start2.write(1);
-        //cout<<"@"<<sc_time_stamp().to_seconds()<<"s Image packet transmission to mobile 2 begins"<<endl;
-        wait(SERVER_TO_MOBILE_PACKET_TRANSMISSION_DELAY, SC_MS);
-        //cout<<"@"<<sc_time_stamp().to_seconds()<<"s Image packet transmission to mobile 2 ends"<<endl;
-        packet_end2.write(1);
-
-        _network_free = true;
-        network_free1.write(1);
-        network_free2.write(1);
-        network_free3.write(1);
-
-        wait(DELTA, SC_SEC);
       }
     }
 
     void transmitToMobile3(){
       for(int i = 0; i<MAX_RX_PACKETS; i++){
-        while(!_network_free){
-          //cout<<"@"<<sc_time_stamp().to_seconds()<<"s Network busy for server to send image packets to mobile 3"<<endl;
-          wait((rand()%6)+1 , SC_SEC);  //wait if netwrok busy
+        while(true){
+          if(_network_free){
+            /*
+            while(!_network_free){
+              //cout<<"@"<<sc_time_stamp().to_seconds()<<"s Network busy for server to send image packets to mobile 3"<<endl;
+              wait((rand()%6)+1 , SC_SEC);  //wait if netwrok busy
+            }
+            */
+            _network_free = false;
+            network_free1.write(0);
+            network_free2.write(0);
+            network_free3.write(0);
+
+            packet_start3.write(0);
+            packet_end3.write(0);
+            wait(5, SC_NS);
+            packet_start3.write(1);
+            //cout<<"@"<<sc_time_stamp().to_seconds()<<"s Image packet transmission to mobile 3 begins"<<endl;
+            wait(SERVER_TO_MOBILE_PACKET_TRANSMISSION_DELAY, SC_MS);
+            //cout<<"@"<<sc_time_stamp().to_seconds()<<"s Image packet transmission to mobile 3 ends"<<endl;
+            packet_end3.write(1);
+
+            _network_free = true;
+            network_free1.write(1);
+            network_free2.write(1);
+            network_free3.write(1);
+
+            wait(DELTA, SC_SEC);
+            break;
+          }
+          else{
+            wait(DELTA, SC_SEC);
+          }
         }
-        _network_free = false;
-        network_free1.write(0);
-        network_free2.write(0);
-        network_free3.write(0);
 
-        packet_start3.write(0);
-        packet_end3.write(0);
-        wait(5, SC_NS);
-        packet_start3.write(1);
-        //cout<<"@"<<sc_time_stamp().to_seconds()<<"s Image packet transmission to mobile 3 begins"<<endl;
-        wait(SERVER_TO_MOBILE_PACKET_TRANSMISSION_DELAY, SC_MS);
-        //cout<<"@"<<sc_time_stamp().to_seconds()<<"s Image packet transmission to mobile 3 ends"<<endl;
-        packet_end3.write(1);
-
-        _network_free = true;
-        network_free1.write(1);
-        network_free2.write(1);
-        network_free3.write(1);
-
-        wait(DELTA, SC_SEC);
       }
     }
 };
