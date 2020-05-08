@@ -1,12 +1,39 @@
 #ifndef DATA_STRUCTURES_H
 #define DATA_STRUCTURES_H
 
-#include<systemc.h>
+#include <systemc.h>
 #include <map>
 #include <fstream>
-#include<iostream>
+#include <iostream>
+#include <cmath>
 
+#define PACKET_SIZE 1000000
 #define TUPLES_PER_PACKETS 20
+#define MAX_RX_PACKETS (8000000/PACKET_SIZE)
+
+#define BANDWIDTH 1000000
+#define SERVER_TO_MOBILE_PACKET_TRANSMISSION_DELAY ((float)((PACKET_SIZE * 1000)/BANDWIDTH))
+#define MOBILE_TO_SERVER_PACKET_TRANSMISSION_DELAY ((float)((3840 * 1000)/BANDWIDTH))
+
+#define IMAGE_TRANSMIT_TIME ( (((float)(8000000/BANDWIDTH))*3.0f) + 40.0f )
+
+#define DELTA (float)0.25
+/*
+//case 1
+#define t1 200.0f
+#define t2 220.0f
+#define t3 225.0f
+#define t4 230.0f
+#define t5 250.0f
+*/
+
+//case 2
+#define t1 150.0f
+#define t2 175.0f
+#define t3 200.0f
+#define t4 225.0f
+#define t5 250.0f
+
 
 struct roiTuple {
     int roi;
@@ -24,6 +51,10 @@ struct point {
 };
 
 std::map<int , std::vector<point> > roiMap1 ();
+std::map<int , std::vector<point> > roiMap2 ();
+std::map<int , std::vector<point> > roiMap3 ();
+std::map<int , std::vector<point> > roiMap4 ();
+std::map<int , std::vector<point> > roiMap5 ();
 std::vector<point> gazeMap();
 
 std::map<int , std::vector<point> > _roiMap1 = roiMap1();
@@ -107,11 +138,11 @@ std::map<int , std::vector<point> > roiMap4 () { //image 1
     _map[5].push_back(point(550 , 10));
     _map[5].push_back(point(700 , 1000));
     // ROI 6
-    _map[5].push_back(point(710 , 10));
-    _map[5].push_back(point(860 , 1000));
+    _map[6].push_back(point(710 , 10));
+    _map[6].push_back(point(860 , 1000));
     // ROI 7
-    _map[5].push_back(point(870 , 10));
-    _map[5].push_back(point(1010 , 1000));
+    _map[7].push_back(point(870 , 10));
+    _map[7].push_back(point(1010 , 1000));
   	return _map;
 }
 
@@ -133,11 +164,11 @@ std::map<int , std::vector<point> > roiMap5 () { //image 1
     _map[5].push_back(point(10 , 550));
     _map[5].push_back(point(1000 , 700));
     // ROI 6
-    _map[5].push_back(point(10 , 710));
-    _map[5].push_back(point(1000 , 860));
+    _map[6].push_back(point(10 , 710));
+    _map[6].push_back(point(1000 , 860));
     // ROI 7
-    _map[5].push_back(point(10 , 870));
-    _map[5].push_back(point(1000 , 1010));
+    _map[7].push_back(point(10 , 870));
+    _map[7].push_back(point(1000 , 1010));
   	return _map;
 }
 

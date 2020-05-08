@@ -1,123 +1,267 @@
 //Handshaking activities
-@ 0 s----------Start Simulation---------
 
-@15.11s _mobile1_ requests network access
-@15.11s _mobile2_ requests network access
-@15.11s _mobile3_ requests network access
-@15.11s Network access granted to _mobile1_
-@15.11s Server didn't acknowledge _mobile3_
-@15.11s Server didn't acknowledge _mobile2_
-@15.11s _mobile1_ begins packet transmission
-@15.11s Network busy for _mobile2_
-@15.118s _mobile1_ ends packet transmission
-@17.11s _mobile2_ requests network access
-@17.11s Network access granted to _mobile2_
-@17.11s _mobile2_ begins packet transmission
-@17.118s _mobile2_ ends packet transmission
-@18.11s _mobile3_ requests network access
-@18.11s Network access granted to _mobile3_
-@18.11s _mobile3_ begins packet transmission
-@18.118s _mobile3_ ends packet transmission
-@23.21s _mobile1_ requests network access
-@23.21s Network access granted to _mobile1_
-@23.21s _mobile1_ begins packet transmission
-@23.218s _mobile1_ ends packet transmission
-@25.21s _mobile2_ requests network access
-@25.21s Network access granted to _mobile2_
-@25.21s _mobile2_ begins packet transmission
-@25.218s _mobile2_ ends packet transmission
-@26.21s _mobile3_ requests network access
-@26.21s Network access granted to _mobile3_
-@26.21s _mobile3_ begins packet transmission
-@26.218s _mobile3_ ends packet transmission
-@39.32s _mobile1_ requests network access
-@39.32s Network access granted to _mobile1_
-@39.32s _mobile1_ begins packet transmission
-@39.328s _mobile1_ ends packet transmission
-@41.32s _mobile2_ requests network access
-@41.32s Network access granted to _mobile2_
-@41.32s _mobile2_ begins packet transmission
-@41.328s _mobile2_ ends packet transmission
-@42.32s _mobile3_ requests network access
-@42.32s Network access granted to _mobile3_
-@42.32s _mobile3_ begins packet transmission
-@42.328s _mobile3_ ends packet transmission
-@52.18s _mobile1_ requests network access
-@52.18s Network access granted to _mobile1_
-@52.18s _mobile1_ begins packet transmission
-@52.188s _mobile1_ ends packet transmission
-@54.18s _mobile2_ requests network access
-@54.18s Network access granted to _mobile2_
-@54.18s _mobile2_ begins packet transmission
-@54.188s _mobile2_ ends packet transmission
-@55.18s _mobile3_ requests network access
-@55.18s Network access granted to _mobile3_
-@55.18s _mobile3_ begins packet transmission
-@55.188s _mobile3_ ends packet transmission
-@63.61s _mobile1_ requests network access
-@63.61s Network access granted to _mobile1_
-@63.61s _mobile1_ begins packet transmission
-@63.618s _mobile1_ ends packet transmission
-@65.61s _mobile2_ requests network access
-@65.61s Network access granted to _mobile2_
-@65.61s _mobile2_ begins packet transmission
-@65.618s _mobile2_ ends packet transmission
-@66.61s _mobile3_ requests network access
-@66.61s Network access granted to _mobile3_
-@66.61s _mobile3_ begins packet transmission
-@66.618s _mobile3_ ends packet transmission
-@76.21s _mobile1_ requests network access
-@76.21s Network access granted to _mobile1_
-@76.21s _mobile1_ begins packet transmission
-@76.218s _mobile1_ ends packet transmission
-@78.21s _mobile2_ requests network access
-@78.21s Network access granted to _mobile2_
-@78.21s _mobile2_ begins packet transmission
-@78.218s _mobile2_ ends packet transmission
-@79.21s _mobile3_ requests network access
-@79.21s Network access granted to _mobile3_
-@79.21s _mobile3_ begins packet transmission
-@79.218s _mobile3_ ends packet transmission
-@88.01s _mobile1_ requests network access
-@88.01s Network access granted to _mobile1_
-@88.01s _mobile1_ begins packet transmission
-@88.018s _mobile1_ ends packet transmission
-@90.01s _mobile2_ requests network access
-@90.01s Network access granted to _mobile2_
-@90.01s _mobile2_ begins packet transmission
-@90.018s _mobile2_ ends packet transmission
-@91.01s _mobile3_ requests network access
-@91.01s Network access granted to _mobile3_
-@91.01s _mobile3_ begins packet transmission
-@91.018s _mobile3_ ends packet transmission
+Case 2 with BW = 1Mbps, Packet size = 1Mb, delta = 0.25s, starting image packet transfer at 87s
 
-@ 100 s----------End Simulation---------
+@ 0 s----------Start---------
 
-
-//Counting the packets at each time interval
 
 @ 0 s----------Start Simulation---------
 
 
-@15.11s _mobile1_ packets = 1
-@15.11s _mobile2_ packets = 1
-@15.11s _mobile3_ packets = 1
-@23.21s _mobile1_ packets = 2
-@27.21s _mobile2_ packets = 2
-@30.21s _mobile3_ packets = 2
-@39.32s _mobile1_ packets = 3
-@43.32s _mobile2_ packets = 3
-@46.32s _mobile3_ packets = 3
-@52.18s _mobile1_ packets = 4
-@56.18s _mobile2_ packets = 4
-@59.18s _mobile3_ packets = 4
-@63.61s _mobile1_ packets = 5
-@67.61s _mobile2_ packets = 5
-@70.61s _mobile3_ packets = 5
-@76.21s _mobile1_ packets = 6
-@80.21s _mobile2_ packets = 6
-@83.21s _mobile3_ packets = 6
-@88.01s _mobile1_ packets = 7
-@92.01s _mobile2_ packets = 7
-@95.01s _mobile3_ packets = 7
-@ 100 s----------End Simulation---------
+@87s An image packet received by _mobile1_
+@88.25s An image packet received by _mobile1_
+@89.5s An image packet received by _mobile1_
+@90.75s An image packet received by _mobile1_
+@92s An image packet received by _mobile1_
+@93.25s An image packet received by _mobile1_
+@94.5s An image packet received by _mobile1_
+@95.75s An image packet received by _mobile1_
+@95.75s Full image received by _mobile1_ , image_counter = 1
+@97s An image packet received by _mobile2_
+@98.25s An image packet received by _mobile2_
+@99.5s An image packet received by _mobile2_
+@100.75s An image packet received by _mobile2_
+@102s An image packet received by _mobile2_
+@103.25s An image packet received by _mobile2_
+@104.5s An image packet received by _mobile2_
+@105.75s An image packet received by _mobile2_
+@105.75s Full image received by _mobile2_ , image_counter = 1
+@107s An image packet received by _mobile3_
+@108.25s An image packet received by _mobile3_
+@109.5s An image packet received by _mobile3_
+@110.75s An image packet received by _mobile3_
+@112s An image packet received by _mobile3_
+@113.25s An image packet received by _mobile3_
+@114.5s An image packet received by _mobile3_
+@115.75s An image packet received by _mobile3_
+@115.75s Full image received by _mobile3_ , image_counter = 1
+@117s An image packet received by _mobile1_
+@118.25s An image packet received by _mobile1_
+@119.5s An image packet received by _mobile1_
+@120.75s An image packet received by _mobile1_
+@122s An image packet received by _mobile1_
+@123.25s An image packet received by _mobile1_
+@124.5s An image packet received by _mobile1_
+@125.75s An image packet received by _mobile1_
+@125.75s Full image received by _mobile1_ , image_counter = 2
+@127s An image packet received by _mobile2_
+@128.25s An image packet received by _mobile2_
+@129.5s An image packet received by _mobile2_
+@130.75s An image packet received by _mobile2_
+@132s An image packet received by _mobile2_
+@133.25s An image packet received by _mobile2_
+@134.5s An image packet received by _mobile2_
+@135.75s An image packet received by _mobile2_
+@135.75s Full image received by _mobile2_ , image_counter = 2
+@137s An image packet received by _mobile3_
+@138.25s An image packet received by _mobile3_
+@139.5s An image packet received by _mobile3_
+@140.75s An image packet received by _mobile3_
+@142s An image packet received by _mobile3_
+@143.25s An image packet received by _mobile3_
+@144.5s An image packet received by _mobile3_
+@145.75s An image packet received by _mobile3_
+@145.75s Full image received by _mobile3_ , image_counter = 2
+@147s An image packet received by _mobile1_
+@148.25s An image packet received by _mobile1_
+@149.5s An image packet received by _mobile1_
+@150s Image 1 is being processed by _mobile3_ , image_counter = 2
+@150s Image 1 is being processed by _mobile1_ , image_counter = 2
+@150s Image 1 is being processed by _mobile2_ , image_counter = 2
+@150.75s An image packet received by _mobile1_
+@152s An image packet received by _mobile1_
+@153.25s An image packet received by _mobile1_
+@154.5s An image packet received by _mobile1_
+@155.75s An image packet received by _mobile1_
+@155.75s Full image received by _mobile1_ , image_counter = 3
+@157s An image packet received by _mobile2_
+@158.25s An image packet received by _mobile2_
+@159.5s An image packet received by _mobile2_
+@160.75s An image packet received by _mobile2_
+@162s An image packet received by _mobile2_
+@163.25s An image packet received by _mobile2_
+@164.5s An image packet received by _mobile2_
+@165.1s _mobile1_ has a packet ready
+@165.1s _mobile2_ has a packet ready
+@165.1s _mobile3_ has a packet ready
+@165.75s An image packet received by _mobile2_
+@165.75s Full image received by _mobile2_ , image_counter = 3
+@167s An image packet received by _mobile3_
+@168.25s An image packet received by _mobile3_
+@169.5s An image packet received by _mobile3_
+@170.75s An image packet received by _mobile3_
+@172s An image packet received by _mobile3_
+@172.1s _mobile2_ requests network access
+@172.1s Network access granted to _mobile2_
+@172.1s _mobile2_ begins packet transmission
+@172.103s _mobile2_ ends packet transmission
+@173.25s An image packet received by _mobile3_
+@174.5s An image packet received by _mobile3_
+@175s Image 2 is being processed by _mobile1_ , image_counter = 2
+@175s Image 2 is being processed by _mobile3_ , image_counter = 1
+@175s Image 2 is being processed by _mobile2_ , image_counter = 2
+@175.75s An image packet received by _mobile3_
+@175.75s Full image received by _mobile3_ , image_counter = 2
+@177s An image packet received by _mobile1_
+@178.25s An image packet received by _mobile1_
+@179.5s An image packet received by _mobile1_
+@180.75s An image packet received by _mobile1_
+@182s An image packet received by _mobile1_
+@183.25s An image packet received by _mobile1_
+@184.5s An image packet received by _mobile1_
+@185.75s An image packet received by _mobile1_
+@185.75s Full image received by _mobile1_ , image_counter = 3
+@187s An image packet received by _mobile2_
+@188.25s An image packet received by _mobile2_
+@188.82s _mobile2_ has a packet ready
+@189.5s An image packet received by _mobile2_
+@190.75s An image packet received by _mobile2_
+@190.82s _mobile2_ requests network access
+@190.82s Network access granted to _mobile2_
+@190.82s _mobile2_ begins packet transmission
+@190.823s _mobile2_ ends packet transmission
+@192s An image packet received by _mobile2_
+@192.1s _mobile3_ requests network access
+@192.1s Network access granted to _mobile3_
+@192.1s _mobile3_ begins packet transmission
+@192.103s _mobile3_ ends packet transmission
+@193.25s An image packet received by _mobile2_
+@194.5s An image packet received by _mobile2_
+@195.75s An image packet received by _mobile2_
+@195.75s Full image received by _mobile2_ , image_counter = 3
+@197s An image packet received by _mobile3_
+@198.25s An image packet received by _mobile3_
+@199.5s An image packet received by _mobile3_
+@200s Image 3 is being processed by _mobile2_ , image_counter = 2
+@200s Image 3 is being processed by _mobile3_ , image_counter = 1
+@200s Image 3 is being processed by _mobile1_ , image_counter = 2
+@200.75s An image packet received by _mobile3_
+@202s An image packet received by _mobile3_
+@203.25s An image packet received by _mobile3_
+@204.5s An image packet received by _mobile3_
+@205.39s _mobile2_ has a packet ready
+@205.75s An image packet received by _mobile3_
+@205.75s Full image received by _mobile3_ , image_counter = 2
+@207s An image packet received by _mobile1_
+@208.25s An image packet received by _mobile1_
+@209.5s An image packet received by _mobile1_
+@210.54s _mobile3_ has a packet ready
+@210.75s An image packet received by _mobile1_
+@212s An image packet received by _mobile1_
+@213.25s An image packet received by _mobile1_
+@213.39s _mobile2_ requests network access
+@213.39s Network access granted to _mobile2_
+@213.39s _mobile2_ begins packet transmission
+@213.393s _mobile2_ ends packet transmission
+@214.5s An image packet received by _mobile1_
+@214.54s _mobile3_ requests network access
+@214.54s Network access granted to _mobile3_
+@214.54s _mobile3_ begins packet transmission
+@214.543s _mobile3_ ends packet transmission
+@215.75s An image packet received by _mobile1_
+@215.75s Full image received by _mobile1_ , image_counter = 3
+@217s An image packet received by _mobile2_
+@218.25s An image packet received by _mobile2_
+@219.5s An image packet received by _mobile2_
+@220.75s An image packet received by _mobile2_
+@222s An image packet received by _mobile2_
+@222.1s _mobile1_ requests network access
+@222.1s Network access granted to _mobile1_
+@222.1s _mobile1_ begins packet transmission
+@222.103s _mobile1_ ends packet transmission
+@222.86s _mobile2_ has a packet ready
+@223.25s An image packet received by _mobile2_
+@224.5s An image packet received by _mobile2_
+@225s Image 4 is being processed by _mobile1_ , image_counter = 2
+@225s Image 4 is being processed by _mobile2_ , image_counter = 1
+@225s Image 4 is being processed by _mobile3_ , image_counter = 1
+@225.75s An image packet received by _mobile2_
+@225.75s Full image received by _mobile2_ , image_counter = 2
+@226.86s _mobile3_ has a packet ready
+@227s An image packet received by _mobile3_
+@228.25s An image packet received by _mobile3_
+@228.41s _mobile1_ has a packet ready
+@228.41s _mobile1_ requests network access
+@228.41s Network access granted to _mobile1_
+@228.41s _mobile1_ begins packet transmission
+@228.413s _mobile1_ ends packet transmission
+@229.5s An image packet received by _mobile3_
+@230.75s An image packet received by _mobile3_
+@230.86s _mobile2_ requests network access
+@230.86s Network access granted to _mobile2_
+@230.86s _mobile2_ begins packet transmission
+@230.863s _mobile2_ ends packet transmission
+@231.51s _mobile1_ has a packet ready
+@232s An image packet received by _mobile3_
+@233.25s An image packet received by _mobile3_
+@234.5s An image packet received by _mobile3_
+@235.75s An image packet received by _mobile3_
+@235.75s Full image received by _mobile3_ , image_counter = 2
+@236.86s _mobile3_ requests network access
+@236.86s Network access granted to _mobile3_
+@236.86s _mobile3_ begins packet transmission
+@236.863s _mobile3_ ends packet transmission
+@237.2s _mobile2_ has a packet ready
+@237.51s _mobile1_ requests network access
+@237.51s Network access granted to _mobile1_
+@237.51s _mobile1_ begins packet transmission
+@237.513s _mobile1_ ends packet transmission
+@240.91s _mobile3_ has a packet ready
+@240.91s _mobile3_ requests network access
+@240.91s Network access granted to _mobile3_
+@240.91s _mobile3_ begins packet transmission
+@240.913s _mobile3_ ends packet transmission
+@243.92s _mobile2_ has a packet ready
+@243.92s _mobile2_ requests network access
+@243.92s Network access granted to _mobile2_
+@243.92s _mobile2_ begins packet transmission
+@243.923s _mobile2_ ends packet transmission
+@244.23s _mobile1_ has a packet ready
+@244.23s _mobile1_ requests network access
+@244.23s Network access granted to _mobile1_
+@244.23s _mobile1_ begins packet transmission
+@244.233s _mobile1_ ends packet transmission
+@246.41s _mobile2_ has a packet ready
+@246.41s _mobile2_ requests network access
+@246.41s Network access granted to _mobile2_
+@246.41s _mobile2_ begins packet transmission
+@246.413s _mobile2_ ends packet transmission
+@246.69s _mobile3_ has a packet ready
+@246.69s _mobile3_ requests network access
+@246.69s Network access granted to _mobile3_
+@246.69s _mobile3_ begins packet transmission
+@246.693s _mobile3_ ends packet transmission
+@249.9s _mobile1_ has a packet ready
+@249.9s _mobile1_ requests network access
+@249.9s Network access granted to _mobile1_
+@249.9s _mobile1_ begins packet transmission
+@249.903s _mobile1_ ends packet transmission
+@250s Image 5 is being processed by _mobile3_ , image_counter = 1
+@250s Image 5 is being processed by _mobile2_ , image_counter = 1
+@250s Image 5 is being processed by _mobile1_ , image_counter = 1
+@254.98s _mobile2_ has a packet ready
+@254.98s _mobile2_ requests network access
+@254.98s Network access granted to _mobile2_
+@254.98s _mobile2_ begins packet transmission
+@254.983s _mobile2_ ends packet transmission
+@255s _mobile1_ has a packet ready
+@255s _mobile1_ requests network access
+@255s Network access granted to _mobile1_
+@255s _mobile1_ begins packet transmission
+@255.003s _mobile1_ ends packet transmission
+@256.74s _mobile3_ has a packet ready
+@256.74s _mobile3_ requests network access
+@256.74s Network access granted to _mobile3_
+@256.74s _mobile3_ begins packet transmission
+@256.743s _mobile3_ ends packet transmission
+@262.62s _mobile2_ has a packet ready
+@262.62s _mobile2_ requests network access
+@262.62s Network access granted to _mobile2_
+@262.62s _mobile2_ begins packet transmission
+@262.623s _mobile2_ ends packet transmission
+@264.9s _mobile1_ has a packet ready
+@264.9s _mobile1_ requests network access
+@264.9s Network access granted to _mobile1_
+@264.9s _mobile1_ begins packet transmission
+@264.903s _mobile1_ ends packet transmission
+@ 265 s----------End Simulation---------
