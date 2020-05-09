@@ -9,7 +9,7 @@
 class gazeMonitor : public sc_module {
 	public:
 		/*Signals for Module Interconnections*/
-		sc_signal<bool> clock;
+		sc_signal<bool> clock, print_clock;
 		sc_signal<bool> request1, start1, end1, request2, start2, end2, request3, start3, end3 ;
 
     sc_signal<bool> packet_start1;
@@ -74,6 +74,7 @@ class gazeMonitor : public sc_module {
 
 
       m1->clock(clock);
+			m1->print_clock(print_clock);
       m1->network_free(network_free1);
       m1->server_ack(server_ok1);
 			m1->packet_start(packet_start1);
@@ -83,6 +84,7 @@ class gazeMonitor : public sc_module {
       m1->end(end1);
 
       m2->clock(clock);
+			m2->print_clock(print_clock);
       m2->network_free(network_free2);
       m2->server_ack(server_ok2);
 			m2->packet_start(packet_start2);
@@ -92,6 +94,7 @@ class gazeMonitor : public sc_module {
       m2->end(end2);
 
       m3->clock(clock);
+			m3->print_clock(print_clock);
       m3->network_free(network_free3);
       m3->server_ack(server_ok3);
 			m3->packet_start(packet_start3);
@@ -101,6 +104,7 @@ class gazeMonitor : public sc_module {
       m3->end(end3);
 
 			SC_THREAD(clockSignal);
+			SC_THREAD(print_clockSignal);
 		};
 
 		void clockSignal() {
@@ -109,6 +113,15 @@ class gazeMonitor : public sc_module {
 		    clock = false;
 		    wait(5 , SC_MS);
 		    clock = true;
+			}
+		}
+
+		void print_clockSignal() {
+			while (true){
+        wait(0.5 , SC_SEC);
+		    print_clock = false;
+		    wait(0.5 , SC_SEC);
+		    print_clock = true;
 			}
 		}
 

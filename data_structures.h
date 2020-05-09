@@ -11,29 +11,29 @@
 #define TUPLES_PER_PACKETS 20
 #define MAX_RX_PACKETS (8000000/PACKET_SIZE)
 
-#define BANDWIDTH 1000000
+#define BANDWIDTH 10000000
 #define SERVER_TO_MOBILE_PACKET_TRANSMISSION_DELAY ((float)((PACKET_SIZE * 1000)/BANDWIDTH))
 #define MOBILE_TO_SERVER_PACKET_TRANSMISSION_DELAY ((float)((3840 * 1000)/BANDWIDTH))
 
-#define IMAGE_TRANSMIT_TIME ( (((float)(8000000/BANDWIDTH))*3.0f) + 40.0f )
+#define IMAGE_TRANSMIT_TIME ( (((float)(8000000/BANDWIDTH))*3.0f) + 30.0f )
 
-#define DELTA (float)0.25
-/*
+#define DELTA (float)0.5
+
 //case 1
 #define t1 200.0f
 #define t2 220.0f
 #define t3 225.0f
 #define t4 230.0f
 #define t5 250.0f
-*/
 
+/*
 //case 2
 #define t1 150.0f
 #define t2 175.0f
 #define t3 200.0f
 #define t4 225.0f
 #define t5 250.0f
-
+*/
 
 struct roiTuple {
     int roi;

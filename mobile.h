@@ -33,6 +33,8 @@ class mobileBlock : public sc_module {
 		sc_in<bool> packet_start; //From Server, indicates an incoming image packet
 		sc_in<bool> packet_end; //From Server, indicates end of incoming image packet
 
+		sc_in<bool> print_clock;
+
 		// Outputs
 		sc_out<bool> request; // To Server
 		sc_out<bool> start; // To Server
@@ -48,8 +50,8 @@ class mobileBlock : public sc_module {
 			SC_THREAD(prcRx);
 			sensitive<<packet_start.pos();
 			SC_THREAD(prcImageChange);
-			//SC_THREAD(prcTx);
-			//sensitive<<clock.pos();
+			SC_THREAD(printTotalMemory);
+			sensitive<<print_clock.pos();
 
 		};
 
@@ -120,7 +122,7 @@ class mobileBlock : public sc_module {
 				imagePacketCounter++;
 				transmitPacketCounter++;
 				tupleCounter = 0;
-				cout<<"@"<<sc_time_stamp().to_seconds()<<"s "<<s<<" has a packet ready"<<endl;
+				//cout<<"@"<<sc_time_stamp().to_seconds()<<"s "<<s<<" has a packet ready"<<endl;
 				//cout<<"@"<<sc_time_stamp().to_seconds()<<"s "<<s<<" packets = "<<imagePacketCounter<<endl;
 				prcTx();
 			}
@@ -128,9 +130,7 @@ class mobileBlock : public sc_module {
 		}
 
 		void prcTx () {
-			//while(true){
-			//	wait();
-				while(transmitPacketCounter>0){
+			while(transmitPacketCounter>0){
 					while(!network_free.read()){
 						//cout<<"@"<<sc_time_stamp().to_seconds()<<"s "<<"Network busy for "<<s<<endl;
 						wait((rand()%6)+1 , SC_SEC);  //wait if netwrok busy
@@ -138,24 +138,24 @@ class mobileBlock : public sc_module {
 					bool success = false;
 					while(!success){
 						request.write(1); //request network access
-						cout<<"@"<<sc_time_stamp().to_seconds()<<"s "<<s<<" requests network access"<<endl;
+						//cout<<"@"<<sc_time_stamp().to_seconds()<<"s "<<s<<" requests network access"<<endl;
 						wait(5,SC_NS);
 						if(server_ack.read()){
-							cout<<"@"<<sc_time_stamp().to_seconds()<<"s Network access granted to "<<s<<endl;
+							//cout<<"@"<<sc_time_stamp().to_seconds()<<"s Network access granted to "<<s<<endl;
 							start.write(0);
 							end.write(0);
 							wait(5,SC_NS);
 							start.write(1);
-							cout<<"@"<<sc_time_stamp().to_seconds()<<"s "<<s<<" begins packet transmission"<<endl;
+							//cout<<"@"<<sc_time_stamp().to_seconds()<<"s "<<s<<" begins packet transmission"<<endl;
 							wait(MOBILE_TO_SERVER_PACKET_TRANSMISSION_DELAY,SC_MS); //packet delay = packet size/bandwidth
 							end.write(1);
 							wait(5,SC_NS);
-							cout<<"@"<<sc_time_stamp().to_seconds()<<"s "<<s<<" ends packet transmission"<<endl;
+							//cout<<"@"<<sc_time_stamp().to_seconds()<<"s "<<s<<" ends packet transmission"<<endl;
 							success = true;
 							transmitPacketCounter--;
 						}
 						else{
-							cout<<"@"<<sc_time_stamp().to_seconds()<<"s Server didn't acknowledge "<<s<<endl;
+							//cout<<"@"<<sc_time_stamp().to_seconds()<<"s Server didn't acknowledge "<<s<<endl;
 							wait(rand()%6 , SC_SEC);
 							break;
 						}
@@ -164,18 +164,18 @@ class mobileBlock : public sc_module {
 					wait(5,SC_NS);
 				}
 
-			//}
+
 		}
 
 		void prcRx(){
 			while(true){
 				wait();
 				wait(packet_end.posedge_event());
-				cout<<"@"<<sc_time_stamp().to_seconds()<<"s An image packet received by "<<s<<endl;
+				//cout<<"@"<<sc_time_stamp().to_seconds()<<"s An image packet received by "<<s<<endl;
 				receivePacketCounter++;
 				if(receivePacketCounter == MAX_RX_PACKETS){
 					image_counter++;
-					cout<<"@"<<sc_time_stamp().to_seconds()<<"s Full image received by "<<s<<" , image_counter = "<<image_counter<<endl;
+					//cout<<"@"<<sc_time_stamp().to_seconds()<<"s Full image received by "<<s<<" , image_counter = "<<image_counter<<endl;
 					receivePacketCounter = 0;
 				}
 
@@ -189,7 +189,7 @@ class mobileBlock : public sc_module {
 				tupleCounter = 0;
 				transmitPacketCounter = 0;
 				imagePacketCounter = 0;
-				cout<<"@"<<sc_time_stamp().to_seconds()<<"s Image 1 is being processed by "<<s<<" , image_counter = "<<image_counter<<endl;
+				//cout<<"@"<<sc_time_stamp().to_seconds()<<"s Image 1 is being processed by "<<s<<" , image_counter = "<<image_counter<<endl;
 
 				wait(t2-t1, SC_SEC);  //image 2 at t2 sec
 				image_counter--;
@@ -197,7 +197,7 @@ class mobileBlock : public sc_module {
 				tupleCounter = 0;
 				transmitPacketCounter = 0;
 				imagePacketCounter = 0;
-				cout<<"@"<<sc_time_stamp().to_seconds()<<"s Image 2 is being processed by "<<s<<" , image_counter = "<<image_counter<<endl;
+				//cout<<"@"<<sc_time_stamp().to_seconds()<<"s Image 2 is being processed by "<<s<<" , image_counter = "<<image_counter<<endl;
 
 				wait(t3-t2, SC_SEC);   //image 3 at t3 sec
 				image_counter--;
@@ -205,7 +205,7 @@ class mobileBlock : public sc_module {
 				tupleCounter = 0;
 				transmitPacketCounter = 0;
 				imagePacketCounter = 0;
-				cout<<"@"<<sc_time_stamp().to_seconds()<<"s Image 3 is being processed by "<<s<<" , image_counter = "<<image_counter<<endl;
+				//cout<<"@"<<sc_time_stamp().to_seconds()<<"s Image 3 is being processed by "<<s<<" , image_counter = "<<image_counter<<endl;
 
 				wait(t4-t3, SC_SEC);   //image 4 at t4 sec
 				image_counter--;
@@ -213,7 +213,7 @@ class mobileBlock : public sc_module {
 				tupleCounter = 0;
 				transmitPacketCounter = 0;
 				imagePacketCounter = 0;
-				cout<<"@"<<sc_time_stamp().to_seconds()<<"s Image 4 is being processed by "<<s<<" , image_counter = "<<image_counter<<endl;
+				//cout<<"@"<<sc_time_stamp().to_seconds()<<"s Image 4 is being processed by "<<s<<" , image_counter = "<<image_counter<<endl;
 
 				wait(t5-t4, SC_SEC);  //image 5 at t5 sec
 				image_counter--;
@@ -221,9 +221,23 @@ class mobileBlock : public sc_module {
 				tupleCounter = 0;
 				transmitPacketCounter = 0;
 				imagePacketCounter = 0;
-				cout<<"@"<<sc_time_stamp().to_seconds()<<"s Image 5 is being processed by "<<s<<" , image_counter = "<<image_counter<<endl;
+				//cout<<"@"<<sc_time_stamp().to_seconds()<<"s Image 5 is being processed by "<<s<<" , image_counter = "<<image_counter<<endl;
 
 			}
+		}
+
+		void printTotalMemory(){
+      while(true){
+				wait();
+				int temp = (transmitPacketCounter * 3840) + (tupleCounter*64*3)
+				           + (receivePacketCounter*PACKET_SIZE) + (image_counter*8000000);
+				std::string s1 ("_mobile3_");  //change to respective mobile name to print the corresponding data
+				if(s.compare(s1) == 0){
+				  cout<<temp<<endl;
+				}
+
+			}
+
 		}
 
 };

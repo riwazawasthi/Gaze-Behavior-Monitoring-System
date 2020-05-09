@@ -9,7 +9,7 @@
 class serverBlock : public sc_module {
   public:
     //Inputs
-    //sc_in<bool> clock;
+
     sc_in<bool> requestM1;
     sc_in<bool> requestM2;
     sc_in<bool> requestM3;
@@ -118,11 +118,7 @@ class serverBlock : public sc_module {
 
 
         }
-        //_network_free = 1;
-        //network_free1.write(1);
-        //network_free2.write(1);
-        //network_free3.write(1);
-        //wait(50,SC_NS);
+
       }
 
     }
@@ -136,27 +132,27 @@ class serverBlock : public sc_module {
         transmitToMobile2();
         transmitToMobile3();
 
-        //wait(t2-t1, SC_SEC);  // start transmittig image 2
+        // start transmittig image 2
 
         transmitToMobile1();
         transmitToMobile2();
         transmitToMobile3();
 
-        //wait(t3-t2, SC_SEC); // start transmitting image 3
-
-        transmitToMobile1();
-        transmitToMobile2();
-        transmitToMobile3();
-
-
-        //wait(t4-t3, SC_SEC); // start transmitting image 4
+        // start transmitting image 3
 
         transmitToMobile1();
         transmitToMobile2();
         transmitToMobile3();
 
 
-        //wait(t5-t4, SC_SEC); // start transmitting image 5
+         // start transmitting image 4
+
+        transmitToMobile1();
+        transmitToMobile2();
+        transmitToMobile3();
+
+
+         // start transmitting image 5
 
         transmitToMobile1();
         transmitToMobile2();
@@ -169,12 +165,7 @@ class serverBlock : public sc_module {
       for(int i = 0; i<MAX_RX_PACKETS; i++){
         while(true){
           if(_network_free){
-            /*
-            while(!_network_free){
-              //cout<<"@"<<sc_time_stamp().to_seconds()<<"s Network busy for server to send image packets to mobile 1"<<endl;
-              wait((rand()%6)+1 , SC_SEC);  //wait if netwrok busy
-            }
-            */
+
             _network_free = false;
             network_free1.write(0);
             network_free2.write(0);
@@ -210,12 +201,7 @@ class serverBlock : public sc_module {
       for(int i = 0; i<MAX_RX_PACKETS; i++){
         while(true){
           if(_network_free){
-            /*
-            while(!_network_free){
-              //cout<<"@"<<sc_time_stamp().to_seconds()<<"s Network busy for server to send image packets to mobile 2"<<endl;
-              wait((rand()%6)+1 , SC_SEC);  //wait if netwrok busy
-            }
-            */
+
             _network_free = false;
             network_free1.write(0);
             network_free2.write(0);
@@ -250,12 +236,7 @@ class serverBlock : public sc_module {
       for(int i = 0; i<MAX_RX_PACKETS; i++){
         while(true){
           if(_network_free){
-            /*
-            while(!_network_free){
-              //cout<<"@"<<sc_time_stamp().to_seconds()<<"s Network busy for server to send image packets to mobile 3"<<endl;
-              wait((rand()%6)+1 , SC_SEC);  //wait if netwrok busy
-            }
-            */
+            
             _network_free = false;
             network_free1.write(0);
             network_free2.write(0);
